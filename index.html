@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚📚📚 RESOURCES 📚📚📚</title>
+    <style>
+        
+        .banner {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #2c3e50;
+        }
+        a:hover {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner">
+    ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
+</div>
+
+<h1>Courses == TDs == and == Exercises</h1>
+<div id="content"></div>
+
+<script>
+// Nom du propriétaire du repo et du repo public
+const repoOwner = 'leosearch750';
+const repoName = 'RESOURCES_public';
+const folderPath = 'public'; // Dossier où se trouvent tes livres
+
+// Fonction pour créer la liste des fichiers et des dossiers
+function createList(data, parentElement) {
+    const ul = document.createElement('ul');
+    parentElement.appendChild(ul);
+
+    data.forEach(item => {
+        const li = document.createElement('li');
+        ul.appendChild(li);
+
+        if (item.type === 'file' && item.name.endsWith('.pdf')) {
+            // Si c'est un fichier PDF
+            const link = document.createElement('a');
+            link.href = item.download_url;  // URL pour télécharger
+            link.textContent = item.name;
+            li.appendChild(link);
+        } else if (item.type === 'dir') {
+            // Si c'est un dossier, créer un sous-dossier cliquable
+            const folderLink = document.createElement('a');
+            folderLink.href = "#";
+            folderLink.textContent = item.name + " (dossier)";
+            folderLink.addEventListener('click', () => {
+                loadFolderContent(item._links.self, li);
+            });
+            li.appendChild(folderLink);
+        }
+    });
+}
+
+// Fonction pour charger le contenu d'un dossier
+function loadFolderContent(url, parentElement) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // On vide le contenu existant pour afficher la nouvelle liste
+            parentElement.innerHTML = '';
+            createList(data, parentElement);
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            const errorItem = document.createElement('li');
+            errorItem.textContent = "Impossible de récupérer le contenu.";
+            parentElement.appendChild(errorItem);
+        });
+}
+
+// Fonction pour démarrer le chargement du dossier principal
+function start() {
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`;
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const contentDiv = document.getElementById('content');
+            createList(data, contentDiv);  // Créer la liste des fichiers et dossiers
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            const contentDiv = document.getElementById('content');
+            const errorItem = document.createElement('div');
+            errorItem.textContent = "Erreur lors du chargement des fichiers.";
+            contentDiv.appendChild(errorItem);
+        });
+}
+
+// Lancer le chargement du dossier principal
+start();
+</script>
+
+</body>
+</html>
+
