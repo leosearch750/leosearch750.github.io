@@ -7,9 +7,10 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            margin: 30px auto;
+            max-width: 1200px;
+            padding: 20px;
             background-color: #f4f7fa;
-            margin: 0;
-            padding: 0;
         }
 
         .login-container {
@@ -67,25 +68,30 @@
             display: none;
         }
 
-        /* Réutilisation de ton style existant après login */
         .banner {
             background-color: #fff3cd;
             color: #856404;
             border: 1px solid #ffeeba;
             padding: 20px;
-            margin: 30px auto;
+            margin-bottom: 30px;
             border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            max-width: 1000px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .banner:hover {
+            background-color: #ffeeba;
+            transform: scale(1.02);
         }
 
         h1 {
             text-align: center;
             font-size: 36px;
             color: #333;
-            margin: 30px 0;
+            margin-bottom: 40px;
         }
 
         ul {
@@ -103,37 +109,39 @@
             text-decoration: none;
             color: #007bff;
             font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         a:hover {
             color: #0056b3;
+            transform: scale(1.05);
         }
 
         .folder-link {
             color: #28a745;
             font-weight: bold;
+            font-size: 18px;
             cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .folder-link:hover {
             color: #218838;
+            transform: scale(1.05);
         }
 
         .error {
             color: red;
             font-weight: bold;
             text-align: center;
+            margin-top: 30px;
         }
 
         .loading {
             text-align: center;
             color: #007bff;
             font-weight: bold;
-        }
-        .content-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -149,14 +157,12 @@
 </div>
 
 <div class="hidden" id="mainContent">
-    <div class="content-wrapper">
-        <div class="banner">
-            ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
-        </div>
-
-        <h1>Courses, TDs and Exercises</h1>
-        <div id="content"></div>
+    <div class="banner">
+        ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
     </div>
+
+    <h1>Courses, TDs and Exercises</h1>
+    <div id="content"></div>
 </div>
 
 <script>
@@ -175,7 +181,6 @@
         }
     }
 
-    // Fonctions d'affichage des fichiers (même logique que ton ancien code)
     const repoOwner = 'leosearch750';
     const repoName = 'leosearch750.github.io';
     const folderPath = 'public';
