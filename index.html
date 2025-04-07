@@ -1,42 +1,91 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>📚 RESOURCES</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-box input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .login-box button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-box button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Réutilisation de ton style existant après login */
         .banner {
             background-color: #fff3cd;
             color: #856404;
             border: 1px solid #ffeeba;
             padding: 20px;
-            margin-bottom: 30px;
+            margin: 30px auto;
             border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .banner:hover {
-            background-color: #ffeeba;
-            transform: scale(1.02);
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 30px auto;
-            max-width: 1200px;
-            padding: 20px;
-            background-color: #f4f7fa;
+            max-width: 1000px;
         }
 
         h1 {
             text-align: center;
             font-size: 36px;
             color: #333;
-            margin-bottom: 40px;
+            margin: 30px 0;
         }
 
         ul {
@@ -54,71 +103,72 @@
             text-decoration: none;
             color: #007bff;
             font-weight: bold;
-            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         a:hover {
             color: #0056b3;
-            transform: scale(1.05);
         }
 
         .folder-link {
             color: #28a745;
-            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
         }
 
         .folder-link:hover {
             color: #218838;
-            transform: scale(1.05);
         }
 
         .error {
             color: red;
-            font-size: 18px;
             font-weight: bold;
             text-align: center;
-            margin-top: 30px;
         }
 
         .loading {
             text-align: center;
-            font-size: 20px;
-            font-weight: bold;
             color: #007bff;
-        }
-
-        .access-denied {
-            text-align: center;
-            margin-top: 100px;
-            font-size: 22px;
-            color: red;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<script>
-    const password = "1243568790@LeoKom"; // 🛡️ Change ceci par ton vrai mot de passe
-
-    const userPassword = prompt("🔐 Accès restreint : entrez le mot de passe pour voir les documents");
-
-    if (userPassword !== password) {
-        document.body.innerHTML = "<div class='access-denied'>⛔ Accès refusé. Mot de passe incorrect.</div>";
-        throw new Error("Mot de passe incorrect. Fin du chargement.");
-    }
-</script>
-
-<div class="banner">
-    ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
+<div class="login-container" id="login">
+    <div class="login-box">
+        <h2>🔐 Accès privé</h2>
+        <input type="password" id="passwordInput" placeholder="Entrez le mot de passe" />
+        <button onclick="checkPassword()">Entrer</button>
+        <div class="error-message" id="error"></div>
+    </div>
 </div>
 
-<h1>Courses, TDs and Exercises</h1>
-<div id="content"></div>
+<div class="hidden" id="mainContent">
+    <div class="banner">
+        ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
+    </div>
+
+    <h1>Courses, TDs and Exercises</h1>
+    <div id="content"></div>
+</div>
 
 <script>
+    const correctPassword = "motdepasse123"; // 💬 Modifie le mot de passe ici
+
+    function checkPassword() {
+        const input = document.getElementById("passwordInput").value;
+        const error = document.getElementById("error");
+
+        if (input === correctPassword) {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("mainContent").classList.remove("hidden");
+            start(); // Charger le contenu
+        } else {
+            error.textContent = "Mot de passe incorrect.";
+        }
+    }
+
+    // Fonctions d'affichage des fichiers (même logique que ton ancien code)
     const repoOwner = 'leosearch750';
     const repoName = 'leosearch750.github.io';
     const folderPath = 'public';
@@ -174,7 +224,6 @@
 
     function start() {
         showLoadingMessage();
-
         const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`;
         fetch(apiUrl)
             .then(response => response.json())
@@ -192,8 +241,6 @@
                 contentDiv.appendChild(errorItem);
             });
     }
-
-    start();
 </script>
 
 </body>
