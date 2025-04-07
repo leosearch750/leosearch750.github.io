@@ -130,6 +130,11 @@
             color: #007bff;
             font-weight: bold;
         }
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -144,12 +149,14 @@
 </div>
 
 <div class="hidden" id="mainContent">
-    <div class="banner">
-        ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
-    </div>
+    <div class="content-wrapper">
+        <div class="banner">
+            ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
+        </div>
 
-    <h1>Courses, TDs and Exercises</h1>
-    <div id="content"></div>
+        <h1>Courses, TDs and Exercises</h1>
+        <div id="content"></div>
+    </div>
 </div>
 
 <script>
