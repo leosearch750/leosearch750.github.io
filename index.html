@@ -207,13 +207,33 @@
                 link.textContent = item.name;
                 li.appendChild(link);
             } else if (item.type === 'dir') {
+                //const folderLink = document.createElement('span');
+                //folderLink.classList.add('folder-link');
+                //folderLink.textContent = item.name;
+                
+                // Création du lien vers le dossier
                 const folderLink = document.createElement('span');
                 folderLink.classList.add('folder-link');
-                folderLink.textContent = item.name + " (dossier)";
-                folderLink.addEventListener('click', () => {
-                    loadFolderContent(item._links.self, li);
-                });
+                folderLink.textContent = item.name;
                 li.appendChild(folderLink);
+
+                // Conteneur qui accueillera les sous-éléments
+                const subContainer = document.createElement('div');
+                subContainer.style.marginLeft = '20px';
+                subContainer.classList.add('hidden');
+                li.appendChild(subContainer);
+
+                let loaded = false;
+
+                folderLink.addEventListener('click', () => {
+                if (!loaded) {
+                    // Charger les fichiers une seule fois
+                    loadFolderContent(item._links.self, subContainer);
+                    loaded = true;
+                }
+                // Toggle affichage
+                subContainer.classList.toggle('hidden');
+                });
             }
         });
     }
