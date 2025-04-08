@@ -200,12 +200,18 @@
         data.forEach(item => {
             const li = document.createElement('li');
             ul.appendChild(li);
+            
+            if (item.type === 'file') {
+                const allowedExtensions = ['.pdf', '.zip', '.tar', '.tgz', '.tar.gz'];
+                const hasAllowedExtension = allowedExtensions.some(ext => item.name.toLowerCase().endsWith(ext));
+                const hasNoExtension = !item.name.includes('.');
 
-            if (item.type === 'file' && item.name.endsWith('.pdf')) {
+                if (hasAllowedExtension || hasNoExtension) {
                 const link = document.createElement('a');
                 link.href = item.download_url;
                 link.textContent = item.name;
                 li.appendChild(link);
+                }
             } else if (item.type === 'dir') {
                 //const folderLink = document.createElement('span');
                 //folderLink.classList.add('folder-link');
