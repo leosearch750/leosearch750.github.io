@@ -1,315 +1,284 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search Mail Cloud ☁️</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 30px auto;
-      max-width: 1200px;
-      padding: 20px;
-      background-color: #f4f7fa;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Search Mail Cloud ☁️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 30px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #f4f7fa;
+        }
 
-    .login-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-    .login-box {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 100%;
-      max-width: 400px;
-    }
+        .login-box {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
 
-    .login-box h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-    .login-box input {
-      padding: 10px;
-      font-size: 16px;
-      width: 100%;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
+        .login-box input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
 
-    .login-box button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 100%;
-    }
+        .login-box button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-    .login-box button:hover {
-      background-color: #0056b3;
-    }
+        .login-box button:hover {
+            background-color: #0056b3;
+        }
 
-    .error-message {
-      color: red;
-      font-weight: bold;
-      margin-top: 10px;
-    }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-    .hidden {
-      display: none;
-    }
+        .hidden {
+            display: none;
+        }
 
-    .banner {
-      background-color: #fff3cd;
-      color: #856404;
-      border: 1px solid #ffeeba;
-      padding: 20px;
-      margin-bottom: 30px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
+        .banner {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-    .banner:hover {
-      background-color: #ffeeba;
-      transform: scale(1.02);
-    }
+        .banner:hover {
+            background-color: #ffeeba;
+            transform: scale(1.02);
+        }
 
-    h1 {
-      text-align: center;
-      font-size: 36px;
-      color: #333;
-      margin-bottom: 40px;
-    }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 40px;
+        }
 
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
 
-    li {
-      margin: 15px 0;
-      font-size: 18px;
-      color: #333;
-    }
+        li {
+            margin: 15px 0;
+            font-size: 18px;
+            color: #333;
+        }
 
-    a {
-      text-decoration: none;
-      color: #007bff;
-      font-weight: bold;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
 
-    a:hover {
-      color: #0056b3;
-      transform: scale(1.05);
-    }
+        a:hover {
+            color: #0056b3;
+            transform: scale(1.05);
+        }
 
-    .folder-link {
-      color: #28a745;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+        .folder-link {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
 
-    .folder-link:hover {
-      color: #218838;
-      transform: scale(1.05);
-    }
+        .folder-link:hover {
+            color: #218838;
+            transform: scale(1.05);
+        }
 
-    .error {
-      color: red;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 30px;
-    }
+        .error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
 
-    .loading {
-      text-align: center;
-      color: #007bff;
-      font-weight: bold;
-      font-size: 20px;
-    }
-  </style>
+        .loading {
+            text-align: center;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="login-container" id="login">
-    <h2>🔐 Accès privé</h2>
-    <form action="https://formsubmit.co/search.mail750@gmail.com" method="POST">
-      <!-- Nom -->
-      <input type="text" name="Nom" placeholder="Votre nom complet" required>
-
-      <!-- Email -->
-      <input type="email" name="Email" placeholder="Votre adresse email" required>
-
-      <!-- Mot de passe -->
-      <input type="password" name="Mot de passe" placeholder="Mot de passe" required>
-
-      <!-- Redirection après soumission -->
-      <input type="hidden" name="_next" value="https://leosearch750.github.io/" />
-
-      <!-- Anti-spam honeypot -->
-      <input type="text" name="_honey" style="display:none">
-
-      <!-- Pas de captcha -->
-      <input type="hidden" name="_captcha" value="false">
-
-      <!-- Bouton envoyer -->
-      <button type="submit">Entrer</button>
-    <div class="error-message" id="error"></div>
-  </form>
+    <div class="login-box">
+        <h2>🔐 Accès privé</h2>
+        <input type="password" id="passwordInput" placeholder="Entrez le mot de passe" />
+        <button onclick="checkPassword()">Entrer</button>
+        <div class="error-message" id="error"></div>
+    </div>
 </div>
 
 <div class="hidden" id="mainContent">
-  <div class="banner">
-    ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
-  </div>
+    <div class="banner">
+        ⚠️ Cette page contient des documents personnels. Elle est destinée uniquement aux personnes autorisées. Merci de ne pas partager ce lien publiquement.
+    </div>
 
-  <h1>📚 Courses, Praticals TDs/Ecercises and Solutions</h1>
-  <div id="content"></div>
+    <h1>📚 Courses, Praticals TDs/Ecercises and Solutions</h1>
+    <div id="content"></div>
 </div>
 
 <script>
-  const correctPassword = 2027docs@epita.fr;
+    const correctPassword = "2027docs@epita.fr"; // 💬 Modifie le mot de passe ici
 
-  const form = document.getElementById('accessForm');
-  const passwordInput = document.getElementById('passwordInput');
-  const errorBox = document.getElementById('error');
+    function checkPassword() {
+        const input = document.getElementById("passwordInput").value;
+        const error = document.getElementById("error");
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    if (passwordInput.value !== correctPassword) {
-      errorBox.textContent = "Mot de passe incorrect.";
-      return;
+        if (input === correctPassword) {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("mainContent").classList.remove("hidden");
+            start(); // Charger le contenu
+        } else {
+            error.textContent = "Mot de passe incorrect.";
+        }
     }
 
-    // Submit to Formspree
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("mainContent").classList.remove("hidden");
-        start(); // Charger les fichiers
-      } else {
-        errorBox.textContent = "Erreur lors de l'envoi.";
-      }
-    }).catch(() => {
-      errorBox.textContent = "Erreur de connexion.";
-    });
-  });
+    const repoOwner = 'leosearch750';
+    const repoName = 'leosearch750.github.io';
+    const folderPath = 'public';
 
-  const repoOwner = 'leosearch750';
-  const repoName = 'leosearch750.github.io';
-  const folderPath = 'public';
+    function showLoadingMessage() {
+        const contentDiv = document.getElementById('content');
+        const loadingMessage = document.createElement('div');
+        loadingMessage.classList.add('loading');
+        loadingMessage.textContent = "Chargement des documents...";
+        contentDiv.appendChild(loadingMessage);
+    }
 
-  function showLoadingMessage() {
-    const contentDiv = document.getElementById('content');
-    const loadingMessage = document.createElement('div');
-    loadingMessage.classList.add('loading');
-    loadingMessage.textContent = "Chargement des documents...";
-    contentDiv.appendChild(loadingMessage);
-  }
+    function createList(data, parentElement) {
+        const ul = document.createElement('ul');
+        parentElement.appendChild(ul);
 
-  function createList(data, parentElement) {
-    const ul = document.createElement('ul');
-    parentElement.appendChild(ul);
+        data.forEach(item => {
+            const li = document.createElement('li');
+            ul.appendChild(li);
+            
+            if (item.type === 'file') {
+                const allowedExtensions = ['.pdf', '.zip', '.tar', '.tgz', '.tar.gz'];
+                const hasAllowedExtension = allowedExtensions.some(ext => item.name.toLowerCase().endsWith(ext));
+                const hasNoExtension = !item.name.includes('.');
 
-    data.forEach(item => {
-      const li = document.createElement('li');
-      ul.appendChild(li);
+                if (hasAllowedExtension || hasNoExtension) {
+                const link = document.createElement('a');
+                link.href = item.download_url;
+                link.textContent = item.name;
+                li.appendChild(link);
+                }
+            } else if (item.type === 'dir') {
+                //const folderLink = document.createElement('span');
+                //folderLink.classList.add('folder-link');
+                //folderLink.textContent = item.name;
+                
+                // Création du lien vers le dossier
+                const folderLink = document.createElement('span');
+                folderLink.classList.add('folder-link');
+                folderLink.textContent = item.name;
+                li.appendChild(folderLink);
 
-      if (item.type === 'file') {
-        const allowedExtensions = ['.pdf', '.zip', '.tar', '.tgz', '.tar.gz'];
-        const hasAllowedExtension = allowedExtensions.some(ext => item.name.toLowerCase().endsWith(ext));
-        const hasNoExtension = !item.name.includes('.');
+                // Conteneur qui accueillera les sous-éléments
+                const subContainer = document.createElement('div');
+                subContainer.style.marginLeft = '20px';
+                subContainer.classList.add('hidden');
+                li.appendChild(subContainer);
 
-        if (hasAllowedExtension || hasNoExtension) {
-          const link = document.createElement('a');
-          link.href = item.download_url;
-          link.textContent = item.name;
-          li.appendChild(link);
-        }
-      } else if (item.type === 'dir') {
-        const folderLink = document.createElement('span');
-        folderLink.classList.add('folder-link');
-        folderLink.textContent = item.name;
-        li.appendChild(folderLink);
+                let loaded = false;
 
-        const subContainer = document.createElement('div');
-        subContainer.style.marginLeft = '20px';
-        subContainer.classList.add('hidden');
-        li.appendChild(subContainer);
-
-        let loaded = false;
-        folderLink.addEventListener('click', () => {
-          if (!loaded) {
-            loadFolderContent(item._links.self, subContainer);
-            loaded = true;
-          }
-          subContainer.classList.toggle('hidden');
+                folderLink.addEventListener('click', () => {
+                if (!loaded) {
+                    // Charger les fichiers une seule fois
+                    loadFolderContent(item._links.self, subContainer);
+                    loaded = true;
+                }
+                // Toggle affichage
+                subContainer.classList.toggle('hidden');
+                });
+            }
         });
-      }
-    });
-  }
+    }
 
-  function loadFolderContent(url, parentElement) {
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        parentElement.innerHTML = '';
-        createList(data, parentElement);
-      })
-      .catch(error => {
-        console.error('Erreur:', error);
-        const errorItem = document.createElement('li');
-        errorItem.classList.add('error');
-        errorItem.textContent = "Impossible de récupérer le contenu.";
-        parentElement.appendChild(errorItem);
-      });
-  }
+    function loadFolderContent(url, parentElement) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                parentElement.innerHTML = '';
+                createList(data, parentElement);
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                const errorItem = document.createElement('li');
+                errorItem.classList.add('error');
+                errorItem.textContent = "Impossible de récupérer le contenu.";
+                parentElement.appendChild(errorItem);
+            });
+    }
 
-  function start() {
-    showLoadingMessage();
-    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`;
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        const contentDiv = document.getElementById('content');
-        contentDiv.innerHTML = '';
-        createList(data, contentDiv);
-      })
-      .catch(error => {
-        console.error('Erreur:', error);
-        const contentDiv = document.getElementById('content');
-        const errorItem = document.createElement('div');
-        errorItem.classList.add('error');
-        errorItem.textContent = "Erreur lors du chargement des fichiers.";
-        contentDiv.appendChild(errorItem);
-      });
-  }
+    function start() {
+        showLoadingMessage();
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`;
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const contentDiv = document.getElementById('content');
+                contentDiv.innerHTML = '';
+                createList(data, contentDiv);
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                const contentDiv = document.getElementById('content');
+                const errorItem = document.createElement('div');
+                errorItem.classList.add('error');
+                errorItem.textContent = "Erreur lors du chargement des fichiers.";
+                contentDiv.appendChild(errorItem);
+            });
+    }
 </script>
 
 </body>
